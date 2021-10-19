@@ -54,63 +54,64 @@ public class ChatUtils {
             var3 = new BigDecimal(1.0E10D);
             symbol = "OC";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal("1000000000000000000000000")) > 0) {
             var2 = new BigDecimal(1000000000000000L);
             var3 = new BigDecimal(1.0E9D);
             symbol = "SP";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal("100000000000000000000")) == 1) {
             var2 = new BigDecimal(10000000000000L);
             var3 = new BigDecimal(1.0E8D);
             symbol = "SX";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal(1000000000000000000L)) == 1) {
             var2 = new BigDecimal(100000000000L);
             var3 = new BigDecimal(1.0E7D);
             symbol = "QT";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal(1000000000000000L)) == 1) {
             var2 = new BigDecimal(1000000000L);
             var3 = new BigDecimal(1000000.0D);
             symbol = "Q";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal(1000000000000L)) > 0) {
             var2 = new BigDecimal(100000000);
             var3 = new BigDecimal(10000.0D);
             symbol = "T";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal(1000000000L)) > 0) {
             var2 = new BigDecimal(1000000);
             var3 = new BigDecimal(1000.0D);
             symbol = "B";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
         if (big.compareTo(new BigDecimal(1000000)) > 0) {
             var2 = new BigDecimal(10000);
             var3 = new BigDecimal(100.0D);
             symbol = "M";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
+
         if (big.compareTo(new BigDecimal(1000)) > 0) {
             var2 = new BigDecimal(100);
             var3 = new BigDecimal(10.0D);
             symbol = "k";
             format = String.valueOf(big.divide(var2).divide(var3).setScale(1, RoundingMode.HALF_UP));
-            return String.valueOf(String.valueOf(format)) + symbol;
+            return format + symbol;
         }
 
         return money + "";

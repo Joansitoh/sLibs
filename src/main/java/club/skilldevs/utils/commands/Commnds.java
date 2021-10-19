@@ -138,4 +138,5 @@ public abstract class Commnds extends BukkitCommand {
                 .then(ChatUtils.translate(" &7| &f" + description));
         return message;
     }
+
 }

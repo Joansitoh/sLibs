@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>club.skilldevs.utils</groupId>
-    <artifactId>SkillPluginUtils</artifactId>
-    <version>0.1.2</version>
+    <artifactId>sLibs</artifactId>
+    <version>1.1</version>
 
     <name>SkillTeam Library</name>
-    <description>This is a library for SkillTeam Development Team plugins.</description>
+    <description>This is a library for SkillTeam Development plugins.</description>
     <url>https://github.com/Joansitoh/SkillPluginUtils</url>
 
     <licenses>
@@ -98,6 +98,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -111,6 +112,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -125,17 +127,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>

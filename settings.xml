@@ -1,0 +1,22 @@
+<settings>
+    <servers>
+        <server>
+            <id>ossrh</id>
+            <username>3TXf6RIH</username>
+            <password>OMFzoCjwdKmzqd9xK4PxS1lZ8AaxMLVEcZirQAsTtViP</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>0x7BC96A1B</gpg.passphrase>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
