@@ -1,22 +1,23 @@
 package club.skilldevs.utils.lunarapi.listener;
 
+import club.skilldevs.utils.SkillManager;
 import club.skilldevs.utils.lunarapi.LunarClientAPI;
 import club.skilldevs.utils.lunarapi.event.LCPlayerRegisterEvent;
 import club.skilldevs.utils.lunarapi.nethandler.client.LCPacketUpdateWorld;
 import lombok.RequiredArgsConstructor;
-import me.joansiitoh.lunarparty.sLunar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
+import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public class LunarClientLoginListener implements Listener {
 
     private final LunarClientAPI lunarClientAPI;
-    private final sLunar INSTANCE = sLunar.INSTANCE;
+    private final JavaPlugin INSTANCE = SkillManager.INSTANCE;
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
