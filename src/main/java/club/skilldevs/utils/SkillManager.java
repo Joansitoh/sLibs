@@ -1,6 +1,5 @@
 package club.skilldevs.utils;
 
-import club.skilldevs.utils.lunarapi.LunarClientAPI;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,11 +12,8 @@ public class SkillManager {
 
     public static JavaPlugin INSTANCE;
 
-    private final LunarClientAPI lunarClientAPI;
-
     public SkillManager(JavaPlugin plugin) {
         INSTANCE = plugin;
-        lunarClientAPI = new LunarClientAPI(plugin);
     }
 
 }
