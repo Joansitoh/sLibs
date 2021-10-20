@@ -1,5 +1,5 @@
 # sLibs (SkillLibs)
-### This is a library for SkillTeam Devleopment team plugins.
+### This is a library for SkillTeam Devleopment plugins.
 
 
 ## API initialization
