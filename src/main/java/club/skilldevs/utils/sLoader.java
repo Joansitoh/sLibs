@@ -8,11 +8,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Date: 18/10/2021 - 22:14.
  */
 @Getter
-public class SkillManager {
+public class sLoader {
 
     public static JavaPlugin INSTANCE;
 
-    public SkillManager(JavaPlugin plugin) {
+    public sLoader(JavaPlugin plugin) {
         INSTANCE = plugin;
     }
 

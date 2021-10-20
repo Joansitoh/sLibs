@@ -11,27 +11,27 @@ public class Runnables {
     }
 
     public static void run(Callable callable) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTask(SkillManager.INSTANCE, callable::call);
+        sLoader.INSTANCE.getServer().getScheduler().runTask(sLoader.INSTANCE, callable::call);
     }
 
     public static void runAsync(Callable callable) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTaskAsynchronously(SkillManager.INSTANCE, callable::call);
+        sLoader.INSTANCE.getServer().getScheduler().runTaskAsynchronously(sLoader.INSTANCE, callable::call);
     }
 
     public static void runLater(Callable callable, long delay) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTaskLater(SkillManager.INSTANCE, callable::call, delay);
+        sLoader.INSTANCE.getServer().getScheduler().runTaskLater(sLoader.INSTANCE, callable::call, delay);
     }
 
     public static void runAsyncLater(Callable callable, long delay) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTaskLaterAsynchronously(SkillManager.INSTANCE, callable::call, delay);
+        sLoader.INSTANCE.getServer().getScheduler().runTaskLaterAsynchronously(sLoader.INSTANCE, callable::call, delay);
     }
 
     public static void runTimer(Callable callable, long delay, long interval) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTaskTimer(SkillManager.INSTANCE, callable::call, delay, interval);
+        sLoader.INSTANCE.getServer().getScheduler().runTaskTimer(sLoader.INSTANCE, callable::call, delay, interval);
     }
 
     public static void runAsyncTimer(Callable callable, long delay, long interval) {
-        SkillManager.INSTANCE.getServer().getScheduler().runTaskTimerAsynchronously(SkillManager.INSTANCE, callable::call, delay, interval);
+        sLoader.INSTANCE.getServer().getScheduler().runTaskTimerAsynchronously(sLoader.INSTANCE, callable::call, delay, interval);
     }
 
     public interface Callable {

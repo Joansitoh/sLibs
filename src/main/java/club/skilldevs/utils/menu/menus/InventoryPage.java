@@ -15,7 +15,9 @@ import java.util.List;
 public class InventoryPage extends ItemMenu {
 
     private static final HashMap<Player, HashMap<String, Integer>> playerInventoryPage = new HashMap<>();
-    private final HashMap<MenuItem, Integer> locked = new HashMap<>();
+
+    @Setter
+    private HashMap<Integer, MenuItem> fixed = new HashMap<>();
 
     @Getter
     @Setter
@@ -44,16 +46,16 @@ public class InventoryPage extends ItemMenu {
                     inventoryPage.setInventoryAction(inventoryAction);
                 }
 
-                for (MenuItem menuItem : locked.keySet()) inventoryPage.addLockedItem(menuItem, locked.get(menuItem));
+                inventoryPage.setFixed(this.fixed);
                 inventoryPage.open(itemClickEvent.getPlayer());
             }, XMaterial.ARROW.parseItem()));
         }
 
-        int x = 11;
+        int slot = 11;
         for (; index < items.size(); index++) {
-            if (x == 16 || x == 25 || x == 34) x += 4;
+            if (slot == 16 || slot == 25 || slot == 34) slot += 4;
 
-            if (x == 43) {
+            if (slot == 43) {
                 setItem(53, new ActionMenuItem("§a--> (" + (page + 1) + ")", itemClickEvent -> {
                     playerPage.put(title, playerPage.get(title) + 1);
                     playerInventoryPage.put(player, playerPage);
@@ -64,28 +66,33 @@ public class InventoryPage extends ItemMenu {
                         inventoryPage.setInventoryAction(inventoryAction);
                     }
 
-                    for (MenuItem menuItem : locked.keySet()) inventoryPage.addLockedItem(menuItem, locked.get(menuItem));
+                    inventoryPage.setFixed(this.fixed);
                     inventoryPage.open(itemClickEvent.getPlayer());
                 }, XMaterial.ARROW.parseItem()));
                 continue;
             }
 
-            if (x > 43) continue;
+            if (slot > 43) continue;
 
-            setItem(x, items.get(index));
-            x++;
+            setItem(slot, items.get(index));
+            slot++;
         }
-    }
 
-    public void addLockedItem(MenuItem item, int slot) {
-        locked.put(item, slot);
-        setItem(slot, item);
+        for (int x = 0; x < getItems().length; x++) {
+            if (getPageSlots().contains(x)) continue;
+            this.fixed.put(x, getItems()[x]);
+        }
     }
 
     public void fillList(List<Integer> list, MenuItem item) {
         for (int x : list) {
+            if (x > getItems().length) continue;
             if (getItems()[x] == null) setItem(x, item);
         }
+    }
+
+    private List<Integer> getPageSlots() {
+        return Arrays.asList(11, 12, 13, 14, 15,  20, 21, 22, 23, 24,  29, 31, 32, 33, 34, 38, 39, 40, 41, 42);
     }
 
     public List<Integer> getMarginLeft() {

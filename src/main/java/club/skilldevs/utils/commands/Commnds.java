@@ -2,7 +2,7 @@ package club.skilldevs.utils.commands;
 
 import club.skilldevs.utils.ChatUtils;
 import club.skilldevs.utils.Runnables;
-import club.skilldevs.utils.SkillManager;
+import club.skilldevs.utils.sLoader;
 import club.skilldevs.utils.texts.FancyMessage;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public abstract class Commnds extends BukkitCommand {
 
-    public JavaPlugin INSTANCE = SkillManager.INSTANCE;
+    public JavaPlugin INSTANCE = sLoader.INSTANCE;
 
     private boolean forPlayersOnly, async;
     private String permission;

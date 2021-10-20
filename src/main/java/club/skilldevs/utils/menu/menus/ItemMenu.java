@@ -1,7 +1,7 @@
 
 package club.skilldevs.utils.menu.menus;
 
-import club.skilldevs.utils.SkillManager;
+import club.skilldevs.utils.sLoader;
 import club.skilldevs.utils.menu.ItemMenuHolder;
 import club.skilldevs.utils.menu.ItemMenuListener;
 import club.skilldevs.utils.xseries.XMaterial;
@@ -101,8 +101,8 @@ public class ItemMenu {
     }
 
     public void open(Player player) {
-        if (ItemMenuListener.getInstance().isRegistered(SkillManager.INSTANCE))
-            ItemMenuListener.getInstance().register(SkillManager.INSTANCE);
+        if (ItemMenuListener.getInstance().isRegistered(sLoader.INSTANCE))
+            ItemMenuListener.getInstance().register(sLoader.INSTANCE);
 
         Inventory inventory = Bukkit.createInventory(new ItemMenuHolder(this, Bukkit.createInventory(player, this.size.getSize())), this.size.getSize(), this.name);
         this.apply(inventory, player);
@@ -150,7 +150,7 @@ public class ItemMenu {
                         player.updateInventory();
                         if (itemClickEvent.isClose() || itemClickEvent.isGoBack()) {
                             String playerName = player.getName();
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(SkillManager.INSTANCE, () -> {
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(sLoader.INSTANCE, () -> {
                                 Player p = Bukkit.getPlayerExact(playerName);
                                 if (p != null) p.closeInventory();
                             }, 1L);
@@ -158,7 +158,7 @@ public class ItemMenu {
 
                         if (itemClickEvent.isGoBack() && this.hasParent()) {
                             String playerName = player.getName();
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(SkillManager.INSTANCE, () -> {
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(sLoader.INSTANCE, () -> {
                                 Player p = Bukkit.getPlayerExact(playerName);
                                 if (p != null) this.parent.open(p);
                             }, 3L);
