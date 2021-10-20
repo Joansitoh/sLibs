@@ -6,11 +6,11 @@
 
     <groupId>club.skilldevs.utils</groupId>
     <artifactId>sLibs</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <name>SkillTeam Library</name>
     <description>This is a library for SkillTeam Development plugins.</description>
-    <url>https://github.com/Joansitoh/SkillPluginUtils</url>
+    <url>https://github.com/Joansitoh/slibs</url>
 
     <licenses>
         <license>
@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/joansitoh/skillpluginutils.git</connection>
-        <developerConnection>scm:git:ssh://github.com:joansitoh/skillpluginutils.git</developerConnection>
-        <url>http://github.com/joansitoh/skillpluginutils/tree/master</url>
+        <connection>scm:git:git://github.com/joansitoh/slibs.git</connection>
+        <developerConnection>scm:git:ssh://github.com:joansitoh/slibs.git</developerConnection>
+        <url>http://github.com/joansitoh/slibs/tree/master</url>
     </scm>
 
     <properties>
