@@ -1,5 +1,6 @@
 package club.skilldevs.utils;
 
+import club.skilldevs.utils.listeners.PlayerDamageListener;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,8 @@ public class sLoader {
 
     public sLoader(JavaPlugin plugin) {
         INSTANCE = plugin;
+
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDamageListener(), plugin);
     }
 
 }
