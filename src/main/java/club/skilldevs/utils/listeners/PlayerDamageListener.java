@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 /**
- * Created by Joansiitoh (DragonsTeam && SkillTeam)
+ * Created by Joansiitoh (DragonsTeam &amp;&amp; SkillTeam)
  * Date: 28/09/2021 - 13:40.
  */
 public class PlayerDamageListener implements Listener {
