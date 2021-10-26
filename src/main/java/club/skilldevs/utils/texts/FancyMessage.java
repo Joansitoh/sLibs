@@ -1,5 +1,6 @@
 package club.skilldevs.utils.texts;
 
+import club.skilldevs.utils.ChatUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -199,7 +200,7 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
     }
 
     public FancyMessage tooltip(final String text) {
-        onHover("show_text", new JsonString(text));
+        onHover("show_text", new JsonString(ChatUtils.translate(text)));
         return this;
     }
 
@@ -292,7 +293,7 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
     }
 
     public FancyMessage then(final String text) {
-        return then(rawText(text));
+        return then(rawText(ChatUtils.translate(text)));
     }
 
     public FancyMessage then(final TextualComponent text) {

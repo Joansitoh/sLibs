@@ -135,7 +135,10 @@ public enum DefaultFontInfo {
     public final static String code = "&k&9&o&r";
 
     public static void sendCenteredMessage(Player player, String message) {
-        if (message == null || message.equals("")) player.sendMessage("");
+        player.sendMessage(getCenteredMessage(message));
+    }
+
+    public static String getCenteredMessage(String message) {
         message = ChatColor.translateAlternateColorCodes('&', message);
 
         int messagePxSize = 0;
@@ -165,7 +168,7 @@ public enum DefaultFontInfo {
             compensated += spaceLength;
         }
 
-        player.sendMessage(ChatUtils.translate(code) + sb + message);
+        return ChatUtils.translate(code) + sb + message;
     }
 
 }
