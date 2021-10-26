@@ -2,8 +2,8 @@
     <servers>
         <server>
             <id>ossrh</id>
-            <username>3TXf6RIH</username>
-            <password>OMFzoCjwdKmzqd9xK4PxS1lZ8AaxMLVEcZirQAsTtViP</password>
+            <username>J4Lyl471</username>
+            <password>rPkFE0qBt9d2kAtTSYZVcO0apJhkD/2FBZTNHt7/POse</password>
         </server>
     </servers>
 
@@ -15,7 +15,7 @@
             </activation>
             <properties>
                 <gpg.executable>gpg</gpg.executable>
-                <gpg.passphrase>0x7BC96A1B</gpg.passphrase>
+                <gpg.passphrase>0x27BB84A8</gpg.passphrase>
             </properties>
         </profile>
     </profiles>

@@ -17,6 +17,13 @@ import java.util.List;
 
 public class ChatUtils {
 
+    public static String MENU_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "------------------------";
+    public static String M_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "-------------";
+    public static String CHAT_BAR = ChatColor.GREEN.toString() + ChatColor.STRIKETHROUGH.toString() + "------------------------------------------------";
+    public static String MEDIUM_CHAT_BAR = ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH.toString() + "------------------------------";
+
+    ////////////////////////////////////////////////////////////
+
     public static String translate(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
