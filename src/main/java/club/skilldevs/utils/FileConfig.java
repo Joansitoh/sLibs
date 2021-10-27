@@ -22,6 +22,8 @@ public class FileConfig {
     private static final List<FileConfig> fileConfigs = new ArrayList<>();
 
     private final File file;
+
+    private String header;
     private FileConfiguration configuration;
 
     public FileConfig(JavaPlugin plugin, String fileName) {
@@ -50,6 +52,21 @@ public class FileConfig {
 
     public void reloadConfig() {
         this.configuration = YamlConfiguration.loadConfiguration(file);
+    }
+
+    public void setHeader(String... header) {
+        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+        StringBuilder builder = new StringBuilder();
+
+        for (int x = 0; x < header.length; x++) {
+            builder.append(header[x]);
+            if (x + 1 != header.length) builder.append("\n");
+        }
+
+        yaml.options().header(builder.toString());
+
+        try { yaml.save(file); } catch (IOException e) { e.printStackTrace(); }
+        this.header = builder.toString();
     }
 
     public ConfigurationSection getSection(String path) {

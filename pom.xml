@@ -6,7 +6,7 @@
 
     <groupId>club.skilldevs.utils</groupId>
     <artifactId>sLibs</artifactId>
-    <version>1.3</version>
+    <version>1.3.2</version>
 
     <name>SkillTeam Library</name>
     <description>This is a library for SkillTeam Development plugins.</description>
