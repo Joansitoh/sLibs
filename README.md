@@ -5,9 +5,9 @@
 
 ## API initialization
 
-> Call **SkillManager** class for API functioning.
+> Call **sLoader** class for API functioning.
 ```
-new SkillManager(plugin);
+new sLoader(plugin);
 ```
 
 ## CUSTOM EVENTS
