@@ -6,7 +6,7 @@
 ## API initialization
 
 > Call **sLoader** class for API functioning.
-```
+```java
 new sLoader(plugin);
 ```
 
