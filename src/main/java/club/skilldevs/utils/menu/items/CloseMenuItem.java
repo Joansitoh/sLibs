@@ -3,7 +3,7 @@ package club.skilldevs.utils.menu.items;
 import club.skilldevs.utils.xseries.XMaterial;
 import club.skilldevs.utils.menu.actions.ItemClickEvent;
 
-public class CloseMenuItem extends StaticMenuItem {
+public class CloseMenuItem extends MenuItem {
 
     public CloseMenuItem() {
         super("&c&lCLOSE", XMaterial.MUSIC_DISC_BLOCKS.parseItem());

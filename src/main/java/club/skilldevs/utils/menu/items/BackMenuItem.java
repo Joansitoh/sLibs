@@ -4,7 +4,7 @@ import club.skilldevs.utils.xseries.XMaterial;
 import club.skilldevs.utils.menu.actions.ItemClickEvent;
 import club.skilldevs.utils.menu.menus.ItemMenu;
 
-public class BackMenuItem extends StaticMenuItem {
+public class BackMenuItem extends MenuItem {
 
     private final ItemMenu old;
 

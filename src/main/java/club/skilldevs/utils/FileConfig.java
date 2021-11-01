@@ -26,6 +26,10 @@ public class FileConfig {
     private String header;
     private FileConfiguration configuration;
 
+    public static void reloadAllConfig() {
+        fileConfigs.forEach(FileConfig::reloadConfig);
+    }
+
     public FileConfig(JavaPlugin plugin, String fileName) {
         this.file = new File(plugin.getDataFolder(), fileName);
 
@@ -46,8 +50,9 @@ public class FileConfig {
         fileConfigs.add(this);
     }
 
-    public static void reloadAllConfig() {
-        fileConfigs.forEach(FileConfig::reloadConfig);
+
+    public void setDefaultIfNotSet(String path, Object value) {
+        if (!configuration.contains(path)) configuration.set(path, value);
     }
 
     public void reloadConfig() {

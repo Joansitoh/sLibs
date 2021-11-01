@@ -1,7 +1,13 @@
 
 package club.skilldevs.utils.menu.items;
 
+import club.skilldevs.utils.ChatUtils;
+import club.skilldevs.utils.ItemUtils;
 import club.skilldevs.utils.menu.actions.ItemClickEvent;
+import club.skilldevs.utils.sLibs;
+import club.skilldevs.utils.sLoader;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,76 +16,41 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter @Setter
 public class MenuItem {
 
     private String displayName;
     private ItemStack icon;
     private List<String> lore;
 
-    public MenuItem(String displayName, ItemStack icon, String... lore) {
-        this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
+    public MenuItem(String displayName, ItemStack icon, List<String> lore) {
+        this.displayName = ItemUtils.getItemName(icon);
+        this.lore = ItemUtils.getItemLore(icon);
         this.icon = icon;
-        this.lore = new ArrayList<>();
-        this.lore.addAll(Arrays.asList(lore));
+
+        if (displayName != null) this.displayName = ChatUtils.translate(displayName);
+        if (lore != null) this.lore = ChatUtils.translate(lore);
     }
 
-    public MenuItem(String displayName, ItemStack icon, List<String> lore) {
-        this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
-        this.icon = icon;
-        this.lore = new ArrayList<>();
-        this.lore.addAll(lore);
+    public MenuItem(String displayName, ItemStack icon, String... lore) {
+        this(displayName, icon, Arrays.asList(lore));
     }
 
     public MenuItem(ItemStack icon) {
-        this.icon = icon;
-        if (icon.hasItemMeta()) {
-            this.lore = icon.getItemMeta().getLore();
-            this.displayName = icon.getItemMeta().getDisplayName();
-        }
-    }
-
-    public static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
-        if (displayName == null) return itemStack;
-
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(displayName);
-        ArrayList<String> loreColor = new ArrayList<>();
-
-        meta.setLore(loreColor);
-
-        itemStack.setItemMeta(meta);
-        return itemStack;
-    }
-
-    public static ItemStack setName(ItemStack itemStack, String displayName) {
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(displayName);
-        itemStack.setItemMeta(meta);
-        return itemStack;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String name) {
-        this.displayName = name;
-    }
-
-    public ItemStack getIcon() {
-        return this.icon;
-    }
-
-    public void setIcon(ItemStack newIcon) {
-        this.icon = newIcon;
-    }
-
-    public List<String> getLore() {
-        return this.lore;
+        this(null, icon);
     }
 
     public ItemStack getFinalIcon() {
-        return MenuItem.setNameAndLore(this.getIcon().clone(), this.getDisplayName(), this.getLore());
+        if (sLibs.iconManager != null) return sLibs.iconManager.getFinalIcon(this);
+
+        if (displayName == null) return icon;
+        ItemStack item = icon.clone();
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(displayName);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
     }
 
     public void onItemClick(ItemClickEvent event) {

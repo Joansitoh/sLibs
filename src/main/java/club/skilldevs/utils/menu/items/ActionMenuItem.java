@@ -2,10 +2,13 @@ package club.skilldevs.utils.menu.items;
 
 import club.skilldevs.utils.menu.actions.ItemClickEvent;
 import club.skilldevs.utils.menu.actions.ItemClickHandler;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
+@Getter @Setter
 public class ActionMenuItem extends MenuItem {
 
     private final MenuItem instance;
@@ -39,12 +42,5 @@ public class ActionMenuItem extends MenuItem {
         this.handler.onItemClick(event);
     }
 
-    public ItemClickHandler getHandler() {
-        return this.handler;
-    }
-
-    public void setHandler(ItemClickHandler handler) {
-        this.handler = handler;
-    }
 }
 
