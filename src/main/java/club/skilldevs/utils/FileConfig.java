@@ -26,12 +26,15 @@ public class FileConfig {
     private String header;
     private FileConfiguration configuration;
 
+    private boolean updateHeader;
+
     public static void reloadAllConfig() {
         fileConfigs.forEach(FileConfig::reloadConfig);
     }
 
     public FileConfig(JavaPlugin plugin, String fileName) {
         this.file = new File(plugin.getDataFolder(), fileName);
+        this.updateHeader = false;
 
         if (!this.file.exists()) {
             this.file.getParentFile().mkdirs();
@@ -149,6 +152,7 @@ public class FileConfig {
     public void save() {
         try {
             this.configuration.save(this.file);
+            if (updateHeader && header != null) setHeader(header);
         } catch (IOException e) {
             Bukkit.getLogger().warning("[" + sLoader.INSTANCE.getName() + "] (sLibs) &cCould not save config file " + this.file.toString());
         }

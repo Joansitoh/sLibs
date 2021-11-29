@@ -1,11 +1,11 @@
 package club.skilldevs.utils.commands;
 
 import club.skilldevs.utils.ChatUtils;
-import club.skilldevs.utils.Runnables;
 import club.skilldevs.utils.sLoader;
 import club.skilldevs.utils.texts.FancyMessage;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
@@ -85,7 +85,7 @@ public abstract class Commnds extends BukkitCommand {
                 return true;
             }
 
-            if (this.async) Runnables.runAsync(() -> execute(sender, args, alias));
+            if (this.async) Bukkit.getScheduler().runTaskAsynchronously(sLoader.INSTANCE, () -> execute(sender, args, alias));
             else execute(sender, args, alias);
             return true;
         }
@@ -97,7 +97,7 @@ public abstract class Commnds extends BukkitCommand {
         }
 
         if (this.async) {
-            Runnables.runAsync(() -> {
+            Bukkit.getScheduler().runTaskAsynchronously(sLoader.INSTANCE, () -> {
                 execute(player, args, alias);
                 execute(sender, args, alias);
             });

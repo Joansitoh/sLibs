@@ -17,6 +17,9 @@ import java.util.List;
 
 public class ChatUtils {
 
+    public static double PROGRESS_BAR_LENGTH = 20.0;
+    public static String PROGRESS_BAR_BLOCK = "█";
+
     public static String MENU_BAR = ChatColor.STRIKETHROUGH.toString() + "------------------------";
     public static String M_BAR = ChatColor.STRIKETHROUGH.toString() + "-------------";
     public static String CHAT_BAR = ChatColor.STRIKETHROUGH.toString() + "------------------------------------------------";
@@ -126,6 +129,29 @@ public class ChatUtils {
 
     ////////////////////////////////////////////////////////////
 
+    public String getProgressBar(int max, double secondsLeft) {
+        double length = PROGRESS_BAR_LENGTH;
+        String chrr = "§c" + PROGRESS_BAR_BLOCK, chrr2 = "§a" + PROGRESS_BAR_BLOCK;
+
+        StringBuilder bar = new StringBuilder();
+        for (int x = 0; x < length; x++) bar.append(chrr);
+
+        double percent = (secondsLeft / max) * 100.0;
+        int bar_length = (int) (percent / 100.0 * length);
+        int bar_length2 = (int) (length - bar_length);
+
+        StringBuilder progressBar = new StringBuilder();
+        for (int x = 0; x < bar_length2; x++) progressBar.append(chrr2);
+        for (int x = 0; x < bar_length; x++) progressBar.append(chrr);
+
+        return ChatUtils.translate("&7&l[" + progressBar + "&7&l]");
+    }
+
+    /**
+     * We recommend the use of async on this function.
+     * @param player
+     * @return
+     */
     public static String getCountry(Player player) {
         InetSocketAddress ip = new InetSocketAddress(player.getAddress().getAddress().getHostAddress(), 0);
         try {

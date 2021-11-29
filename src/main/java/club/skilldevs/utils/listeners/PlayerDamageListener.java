@@ -4,6 +4,7 @@ import club.skilldevs.utils.events.PlayerAttackPlayerEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,6 +27,20 @@ public class PlayerDamageListener implements Listener {
             Arrow arrow = (Arrow) event.getDamager();
             if (arrow.getShooter() instanceof Player) {
                 enemy = Bukkit.getPlayer(((Player) arrow.getShooter()).getUniqueId());
+
+                PlayerAttackPlayerEvent e = new PlayerAttackPlayerEvent(player, enemy, event.getFinalDamage());
+                e.setUsingBow(true);
+
+                Bukkit.getPluginManager().callEvent(e);
+                if (e.isCancelled()) event.setCancelled(true);
+                return;
+            }
+        }
+
+        if (event.getDamager() instanceof Snowball) {
+            Snowball snowball = (Snowball) event.getDamager();
+            if (snowball.getShooter() instanceof Player) {
+                enemy = Bukkit.getPlayer(((Player) snowball.getShooter()).getUniqueId());
 
                 PlayerAttackPlayerEvent e = new PlayerAttackPlayerEvent(player, enemy, event.getFinalDamage());
                 e.setUsingBow(true);

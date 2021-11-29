@@ -131,8 +131,7 @@ public enum DefaultFontInfo {
         return DefaultFontInfo.DEFAULT;
     }
 
-    private final static int CENTER_PX = 154;
-    public final static String code = "&k&9&o&r";
+    public final static int CENTER_PX = 154;
 
     public static void sendCenteredMessage(Player player, String message) {
         player.sendMessage(getCenteredMessage(message));
@@ -168,7 +167,7 @@ public enum DefaultFontInfo {
             compensated += spaceLength;
         }
 
-        return ChatUtils.translate(code) + sb + message;
+        return sb + message;
     }
 
 }
