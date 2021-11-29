@@ -14,7 +14,7 @@
 ## 💾 Downloads / API Initialization
 The last release version of the sLibs can be found on [GitHub](hhtps://github.com/SkillTeam/sLibs).
 
-Alternatively, you can build sLibs via **Maven**. Release versions of Quests are built using **Java 8**.
+Alternatively, you can build sLibs via **Maven**. Release versions of sLibs are built using **Java 8**.
 ````xml
 <dependencies>
     <dependency>
