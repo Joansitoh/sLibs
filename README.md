@@ -2,18 +2,54 @@
 # sLibs (SkillLibs)
 ### This is a library for SkillTeam Devleopment plugins.
 
+&nbsp;
+#### Quick Navigation
+- [Downloads / API Initialization](#-downloads--api-initialization)
+- [Custom events](#-custom-events)
+- [File configuration](#-file-configuration)
+- [Chat utilities](#-chat-utilities)
+- [Discord](#-discord)
+- [License](#-license)
 
-## API initialization
+## 💾 Downloads / API Initialization
+The last release version of the sLibs can be found on [GitHub](hhtps://github.com/SkillTeam/sLibs).
 
-> Call **sLoader** class for API functioning.
+Alternatively, you can build sLibs via **Maven**. Release versions of Quests are built using **Java 8**.
+````xml
+<dependencies>
+    <dependency>
+        <groupId>club.skilldevs.utils</groupId>
+        <artifactId>sLibs</artifactId>
+        <version>1.4.9</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+````
+
+For initialize the sLibs, you only have to register `sLoader` class.
 ```java
-new sLoader(plugin);
+package me.example;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class LibsTutorial extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        sLoader loader = new sLoader(this);
+        
+        // Register damage listener.
+        loader.registerDamageListeners(this);
+    }
+}
 ```
 
-## CUSTOM EVENTS
-### PlayerAttackPlayerEvent
-> This event is called when Player get hitted by entity.
-> Actually detects Wolf, Player and Arrow hits.
+## 📣 Custom events
+#### PlayerAttackPlayerEvent `public PlayerAttackPlayerEvent(Player player, Player enemy, double damage)`
+
+This event is called when **Player** get hitted by entity. 
+Actually detects **Wolf**, **Player**, **Snowball** and **Arrow** hits.
 ```java
 @EventHandler
 public void onPlayerAttack(PlayerAttackPlayerEvent event) {
@@ -25,105 +61,89 @@ public void onPlayerAttack(PlayerAttackPlayerEvent event) {
 	event.getPlayer().sendMessage("Damage dealt: " + event.getDamage());
 }
 ```
-## MENU CREATOR
-> For create new menu.
-`public ItemMenu(String name, Size size, ItemMenu parent)`
+
+## 💽 File configuration
+> FileConfig api is used to create config files more easily.
+`public FileConfig(JavaPlugin plugin, String fileName)`
+> 
+> Get methods **_automatically_** translate **Strings** with chat color format.
+> For other types of data, automatically get default value if it is **NOT** set.
+
+#### File configuration basics.
+For create a new file configuration, you have to create a new instance of `FileConfig`.
 ```java
-ItemMenu menu = new ItemMenu("&6Inventory name", ItemMenu.Size.FIVE_LINE);
-```
-&nbsp;
-> For create new item for menu.
-`public ItemMenu setItem(int position, MenuItem menuItem)`
-```java
-ItemMenu menu = new ItemMenu("&6Inventory name", ItemMenu.Size.FIVE_LINE);
-
-menu.setItem(position, new MenuItem("&6Item name", new ItemStack(Material.WATCH)));
-```
-
-&nbsp; &nbsp;
-
-> For create action item.
-`public ActionMenuItem(String displayName, ItemClickHandler handler, ItemStack icon, String... lore)`
-```java
-ItemMenu menu = new ItemMenu("&6Inventory name", ItemMenu.Size.FIVE_LINE);
-
-menu.setItem(position, new ActionMenuItem("&6Item name", new ItemClickHandler() {
-    @Override
-    public void onItemClick(ItemClickEvent event) {
-        event.getPlayer().sendMessage("You clicked this item!");
-    }
-}, new ItemStack(Material.WATCH)));
+FileConfig config = new FileConfig(this, "settings.yml");
 ```
 
-> With java +8 (lambda)
+**Note:** You can use `FileConfig` to create config files with default values, custom headers, and more.
 ```java
-menu.setItem(position, new ActionMenuItem("&6Item name", event -> {
-    event.getPlayer().sendMessage("You clicked this item!");
-}, new ItemStack(Material.WATCH)));
+// Update header every time you save the config.
+config.setUpdateHeader(true);
+
+config.setHeader("This is an example of header on config file.");
+
+// Set a default value for key if it is NOT set.
+config.setDefaultIfNotSet("CONFIG-VERSION", "1.0");
+config.setDefaultIfNotSet("DEFAULT-COMMAND", "/example");
+
+config.getConfiguration().set("TEST-MSG", "Test message");
+
+config.save();
 ```
 
-## CHATUTILS API
-> Translate method short ChatColor.translateAlternateColorCodes() in one String.
-`public static String translate(String s)`
-
-> You can do the same with Array. 
+Get a **String** value from config.
 ```java
-String message = ChatUtils.translate("&6This message is GOLD!");
-
-///////////////////////////////////////////////////
-
-List<String> list = new ArrayList<>();
-list.add("&6GOLD message.");
-list.add("&cRED message.");
-list.add("&9BLUE message.");
-
-list = ChatUtils.translate(list);
-```
-&nbsp;
-> Upper the fist letter on String.
-`public static String upperFirst(String s)`
-```java
-String message = ChatUtils.upperFirst("hello world");
-OUTPUT = Hello world
+String message = config.getString("TEST-MSG");
 ```
 
-&nbsp; 
-> Format method rename long value into String with format 'HH:mm:ss'.
-> Depending the long of the time, the format change for short.
-`public static String format(long time)`
+## 📝 Chat utilities
+> ChatUtils api is used to translate messages with chat color format.
+> Also, you have multiple methods to transform **Strings** to other formats.
+> 
+> More useful methods are
+> - `public static String translate(String message)`:
+>   Translate **String** with chat color format.
+> - `public static String[] translate(String[] array)`:
+>   Translate **String** array with chat color format.
+> - `public static String format(long milliseconds)`:
+>   Format **long** milliseconds to **String** (HH:mm:ss).
+> - `public static String formatMoney(double money)`:
+>   Format **money** to **String**. `("1000000" -> "1M")`
+> - `public static boolean isNumeric(String number)`:
+>   Check if **String** is **numeric**.
+
+#### Example:
 ```java
-long time = 7200000;
-
-String format = ChatUtils.format(time);
-OUTPUT: 2:00:00
-
-time = 1920000;
-format = ChatUtils.format(time);
-OUTPUT: 32:00
+String message = ChatUtils.translate("&cHello &6World!");
 ```
 
-&nbsp; 
-> Format money make a shortcut of value in String like '1000 = 1K'
-`public static String formatMoney(double money)`
+#### Other methods:
+Progress var is used to get a progress bar in String. Blocks and length can be modified.
+`public String getProgressBar(int max, double secondsLeft)`
 ```java
-double money = 72500000;
+double cooldown_max = 60; // in seconds
+double left = 30;
 
-String format = ChatUtils.formatMoney(money);
-OUTPUT: 72.5M
+ChatUtils.PROGRESS_BAR_LENGTH = 30;
+ChatUtils.PROGRESS_BAR_BLOCK = ":";
+
+String bar = ChatUtils.getProgressBar(cooldown_max, left);
+// OUT: &a:::::::::::::::&c:::::::::::::::
 ```
 
-&nbsp; 
-> Check if String is a valid number.
-`public static boolean isNumeric(String input)`
+Get country is used to get country name from **Player IP** address.
+`public static String getCountry(Player player)`
+
+**Note:** This method is **NOT** thread-safe. Use it in **AsyncTask**.
 ```java
-String number = 356f;
-
-boolean isNumeric = ChatUtils.isNumeric(number);
-OUTPUT: false
-
-///////////////////////////////////////
-
-number = 366;
-isNumeric = ChatUtils.isNumeric(number);
-OUTPUT: true
+String country = ChatUtils.getCountry(player);
 ```
+
+## ☎️ Discord
+**For any question or suggestion you can join our Discord Server.**
+You can join our server by clicking the following link.
+- **https://discord.gg/XWQWQ**
+
+## 📜 License
+The **source code** for sLibs is licensed under the GNU General Public License v3.0, to view the license click
+[here](https://github.com/Joansitoh/sLibs/blob/master/LICENSE).
