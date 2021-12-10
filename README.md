@@ -27,9 +27,11 @@ Alternatively, you can build sLibs via **Maven**. Release versions of sLibs are 
 ````
 
 For initialize the sLibs, you only have to register `sLoader` class.
+
 ```java
 package me.example;
 
+import club.skilldevs.utils.listeners.PlayerDamageListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,27 +40,56 @@ public class LibsTutorial extends JavaPlugin {
     @Override
     public void onEnable() {
         sLoader loader = new sLoader(this);
-        
+
         // Register damage listener.
-        loader.registerDamageListeners(this);
+        getServer().getPluginManager().registerEvents(new PlayerDamageListener(), this);
     }
 }
+```
+
+## 📣 XSeries (CryptoMorin)
+#### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). Is used for get materials and much more for make your plugin Multi-Version.
+
+Create an ItemStack with XSeries.
+```java
+ItemStack item = XMaterial.PURPLE_WOOL.parseItem();
+Material material  = XMaterial.PURPLE_WOOL.parseMaterial();
+```
+
+Get a Sound with XSeries.
+```java
+Sound sound = XSound.ENTITY_WITHER_DEATH.parseSound();
+```
+
+##### SkullCreator is used for get Skulls with player skins or textures.
+```java
 ```
 
 ## 📣 Custom events
 #### PlayerAttackPlayerEvent `public PlayerAttackPlayerEvent(Player player, Player enemy, double damage)`
 
-This event is called when **Player** get hitted by entity. 
+This event is called when **Player** get hitted by entity.
 Actually detects **Wolf**, **Player**, **Snowball** and **Arrow** hits.
 ```java
 @EventHandler
 public void onPlayerAttack(PlayerAttackPlayerEvent event) {
-	if (event.isUsingBow()) {
-		event.getPlayer().sendMessage("You shot " + event.getEnemy());
-	} else {
-		event.getPlayer().sendMessage("You hit " + event.getEnemy());
-	}
-	event.getPlayer().sendMessage("Damage dealt: " + event.getDamage());
+        if (event.isUsingBow()) {
+        event.getPlayer().sendMessage("You shot " + event.getEnemy());
+        } else {
+        event.getPlayer().sendMessage("You hit " + event.getEnemy());
+        }
+
+        event.getPlayer().sendMessage("Damage dealt: " + event.getDamage());
+        }
+```
+
+#### PlayerAuthenticateEvent `public PlayerAuthenticateEvent(Player player)`
+
+This event is called when plugin using `sLoader` class call the event before load their custom player datas.
+```java
+@EventHandler
+public void onPlayerAuthenticate(PlayerAuthenticateEvent event) {
+    event.getPlayer().sendMessage("&aPlayer data loaded.");
 }
 ```
 
@@ -119,7 +150,7 @@ String message = ChatUtils.translate("&cHello &6World!");
 
 #### Other methods:
 Progress var is used to get a progress bar in String. Blocks and length can be modified.
-`public String getProgressBar(int max, double secondsLeft)`
+`public static String getProgressBar(int max, double secondsLeft)`
 ```java
 double cooldown_max = 60; // in seconds
 double left = 30;
@@ -142,7 +173,7 @@ String country = ChatUtils.getCountry(player);
 ## ☎️ Discord
 **For any question or suggestion you can join our Discord Server.**
 You can join our server by clicking the following link.
-- **https://discord.gg/XWQWQ**
+- **https://discord.gg/gXzRaYdzsh**
 
 ## 📜 License
 The **source code** for sLibs is licensed under the GNU General Public License v3.0, to view the license click
