@@ -2,6 +2,7 @@ package club.skilldevs.utils;
 
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.BufferedReader;
@@ -17,13 +18,23 @@ import java.util.List;
 
 public class ChatUtils {
 
-    public static double PROGRESS_BAR_LENGTH = 20.0;
-    public static String PROGRESS_BAR_BLOCK = "█";
+    private static double PROGRESS_BAR_LENGTH = 20.0;
+    private static String PROGRESS_BAR_BLOCK = "█";
 
     public static String MENU_BAR = ChatColor.STRIKETHROUGH.toString() + "------------------------";
     public static String M_BAR = ChatColor.STRIKETHROUGH.toString() + "-------------";
     public static String CHAT_BAR = ChatColor.STRIKETHROUGH.toString() + "------------------------------------------------";
     public static String MEDIUM_CHAT_BAR = ChatColor.STRIKETHROUGH.toString() + "------------------------------";
+
+    ////////////////////////////////////////////////////////////
+
+    public static void send(CommandSender sender, String message) {
+        sender.sendMessage(translate(message));
+    }
+
+    public static void send(CommandSender sender, List<String> messages) {
+        translate(messages).forEach(sender::sendMessage);
+    }
 
     ////////////////////////////////////////////////////////////
 
@@ -36,6 +47,8 @@ public class ChatUtils {
         for (String x : s) list.add(translate(x));
         return list;
     }
+
+    ////////////////////////////////////////////////////////////
 
     public static String upperFirst(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
@@ -129,9 +142,12 @@ public class ChatUtils {
 
     ////////////////////////////////////////////////////////////
 
-    public String getProgressBar(int max, double secondsLeft) {
-        double length = PROGRESS_BAR_LENGTH;
-        String chrr = "§c" + PROGRESS_BAR_BLOCK, chrr2 = "§a" + PROGRESS_BAR_BLOCK;
+    public static String getProgressBar(int max, double secondsLeft) {
+        return getProgressBar(PROGRESS_BAR_BLOCK, PROGRESS_BAR_LENGTH, max, secondsLeft);
+    }
+
+    public static String getProgressBar(String block, double length, int max, double secondsLeft) {
+        String chrr = "§c" + block, chrr2 = "§a" + block;
 
         StringBuilder bar = new StringBuilder();
         for (int x = 0; x < length; x++) bar.append(chrr);
@@ -144,7 +160,7 @@ public class ChatUtils {
         for (int x = 0; x < bar_length2; x++) progressBar.append(chrr2);
         for (int x = 0; x < bar_length; x++) progressBar.append(chrr);
 
-        return ChatUtils.translate("&7&l[" + progressBar + "&7&l]");
+        return ChatUtils.translate(progressBar.toString());
     }
 
     /**

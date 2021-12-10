@@ -6,7 +6,7 @@
 
     <groupId>club.skilldevs.utils</groupId>
     <artifactId>sLibs</artifactId>
-    <version>1.4.9</version>
+    <version>1.4.10</version>
 
     <name>SkillTeam Library</name>
     <description>This is a library for SkillTeam Development plugins.</description>
@@ -84,6 +84,7 @@
     </distributionManagement>
 
     <build>
+        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
