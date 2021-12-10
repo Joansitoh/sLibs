@@ -7,8 +7,9 @@ import java.util.List;
 
 public class ItemUtils {
 
-    public static void setItemName(ItemStack item, String name) {
+    public static ItemStack setItemName(ItemStack item, String name) {
         item.getItemMeta().setDisplayName(name);
+        return item;
     }
 
     public static void setItemLore(ItemStack item, List<String> lore) {

@@ -5,6 +5,7 @@
 &nbsp;
 #### Quick Navigation
 - [Downloads / API Initialization](#-downloads--api-initialization)
+- [XSeries - CryptoMorin](#-xseries---cryptomorin)
 - [Custom events](#-custom-events)
 - [File configuration](#-file-configuration)
 - [Chat utilities](#-chat-utilities)
@@ -20,8 +21,7 @@ Alternatively, you can build sLibs via **Maven**. Release versions of sLibs are 
     <dependency>
         <groupId>club.skilldevs.utils</groupId>
         <artifactId>sLibs</artifactId>
-        <version>1.4.9</version>
-        <scope>provided</scope>
+        <version>1.4.11</version>
     </dependency>
 </dependencies>
 ````
@@ -39,15 +39,36 @@ public class LibsTutorial extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        sLoader loader = new sLoader(this);
+        new sLoader(this);
 
         // Register damage listener.
         getServer().getPluginManager().registerEvents(new PlayerDamageListener(), this);
+        
+        // Register clicks listener.
+        getServer().getPluginManager().registerEvents(new PlayerClickListener(), this);
     }
 }
 ```
 
 ## 📣 XSeries (CryptoMorin)
+#### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). Is used for get materials and much more for make your plugin Multi-Version.
+
+Create an ItemStack with XSeries.
+```java
+ItemStack item = XMaterial.PURPLE_WOOL.parseItem();
+Material material  = XMaterial.PURPLE_WOOL.parseMaterial();
+```
+
+Get a Sound with XSeries.
+```java
+Sound sound = XSound.ENTITY_WITHER_DEATH.parseSound();
+```
+
+##### SkullCreator is used for get Skulls with player skins or textures.
+```java
+```
+
+## 📣 XSeries - CryptoMorin
 #### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). Is used for get materials and much more for make your plugin Multi-Version.
 
 Create an ItemStack with XSeries.
@@ -81,6 +102,16 @@ public void onPlayerAttack(PlayerAttackPlayerEvent event) {
 
         event.getPlayer().sendMessage("Damage dealt: " + event.getDamage());
         }
+```
+
+#### PlayerAuthenticateEvent `public PlayerAuthenticateEvent(Player player)`
+
+This event is called when plugin using `sLoader` class call the event before load their custom player datas.
+```java
+@EventHandler
+public void onPlayerAuthenticate(PlayerAuthenticateEvent event) {
+    event.getPlayer().sendMessage("&aPlayer data loaded.");
+}
 ```
 
 #### PlayerAuthenticateEvent `public PlayerAuthenticateEvent(Player player)`

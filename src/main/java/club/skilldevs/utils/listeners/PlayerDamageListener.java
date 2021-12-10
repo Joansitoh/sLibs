@@ -1,7 +1,14 @@
 package club.skilldevs.utils.listeners;
 
+import club.skilldevs.utils.PlayerCallable;
 import club.skilldevs.utils.events.PlayerAttackPlayerEvent;
+import club.skilldevs.utils.sUtils;
+import io.netty.channel.*;
+import lombok.Getter;
+import net.minecraft.server.v1_8_R3.PacketPlayInArmAnimation;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -10,6 +17,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.*;
 
 /**
  * Created by Joansiitoh (DragonsTeam &amp;&amp; SkillTeam)
@@ -17,7 +29,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
  */
 public class PlayerDamageListener implements Listener {
 
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerReceiveDamage(EntityDamageByEntityEvent event) {
         if (event.isCancelled()) return;
         if (!(event.getEntity() instanceof Player)) return;

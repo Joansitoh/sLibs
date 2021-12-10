@@ -1,5 +1,7 @@
 package club.skilldevs.utils;
 
+import club.skilldevs.utils.listeners.PlayerClickListener;
+import club.skilldevs.utils.listeners.PlayerDamageListener;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -27,6 +29,14 @@ public class sUtils {
 
         // Mode clean
         player.setGameMode(GameMode.SURVIVAL);
+    }
+
+    public static int getPlayerClicks(Player player) {
+        return PlayerClickListener.getClicks(player);
+    }
+
+    public static void setPlayerClickListener(Player player, PlayerCallable callable) {
+        PlayerClickListener.getCallableMap().put(player.getUniqueId(), callable);
     }
 
     ////////////////////////////////////////////////////////////////////////////
