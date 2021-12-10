@@ -1,6 +1,7 @@
 package club.skilldevs.utils;
 
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,17 @@ import java.util.List;
 public class ItemUtils {
 
     public static ItemStack setItemName(ItemStack item, String name) {
-        item.getItemMeta().setDisplayName(name);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        item.setItemMeta(meta);
         return item;
     }
 
-    public static void setItemLore(ItemStack item, List<String> lore) {
-        item.getItemMeta().setLore(lore);
+    public static ItemStack setItemLore(ItemStack item, List<String> lore) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
     }
 
     // Check if item has valid name.
@@ -24,18 +30,8 @@ public class ItemUtils {
 
     // Check if item has valid lore.
     public static boolean hasValidLore(ItemStack item) {
-        if (item == null || !item.hasItemMeta()) return false;
+        if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasLore()) return false;
         return item.getItemMeta().hasLore();
-    }
-
-    // Check if item has name.
-    public static boolean hasName(ItemStack item, String name) {
-        return item.getItemMeta().getDisplayName().equals(name);
-    }
-
-    // Check if item has lore.
-    public static boolean hasLore(ItemStack item, String lore) {
-        return item.getItemMeta().getLore().contains(lore);
     }
 
     public static String getItemName(ItemStack item) {
