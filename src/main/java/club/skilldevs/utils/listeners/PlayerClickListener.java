@@ -2,6 +2,7 @@ package club.skilldevs.utils.listeners;
 
 import club.skilldevs.utils.PlayerCallable;
 import club.skilldevs.utils.events.PlayerAttackPlayerEvent;
+import club.skilldevs.utils.sLoader;
 import io.netty.channel.*;
 import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayInArmAnimation;
@@ -42,17 +43,17 @@ public class PlayerClickListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        injectPlayer(event.getPlayer());
+        if (sLoader.NMS_HANDLER != null) sLoader.NMS_HANDLER.injectPlayer(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        unInjectPlayer(event.getPlayer());
+        if (sLoader.NMS_HANDLER != null) sLoader.NMS_HANDLER.unInjectPlayer(event.getPlayer());
     }
 
     ///////////////////////////////////////////////////////////////////////////
 
-    private void addClick(Player p) {
+    public static void addClick(Player p) {
         try {
             clicks.putIfAbsent(p.getUniqueId(), new ArrayList<>());
             if (blockInteractMap.containsKey(p.getUniqueId())) {
@@ -77,47 +78,5 @@ public class PlayerClickListener implements Listener {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-
-    private void injectPlayer(Player player) {
-        ChannelDuplexHandler channelDuplexHandler = null;
-
-        try {
-            channelDuplexHandler = new ChannelDuplexHandler() {
-                @Override
-                public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
-                    //Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "PACKET READ: " + ChatColor.RED + packet.toString());
-                    if (packet instanceof PacketPlayInArmAnimation) {
-                        addClick(player);
-                        if (callableMap.containsKey(player.getUniqueId())) callableMap.get(player.getUniqueId()).call(player);
-                    }
-
-                    super.channelRead(channelHandlerContext, packet);
-                }
-
-                @Override
-                public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise) throws Exception {
-                    //Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "PACKET WRITE: " + ChatColor.GREEN + packet.toString());
-                    super.write(channelHandlerContext, packet, channelPromise);
-                }
-            };
-        } catch (Exception e) {
-            System.out.println("[GlobalBridge] Error al leer los paquetes al jugador " + player.getName());
-        }
-
-        try {
-            ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().playerConnection.networkManager.channel.pipeline();
-            pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
-        } catch (Exception e) {
-            System.out.println("[GlobalBridge] Error al enviar los paquetes al jugador " + player.getName());
-        }
-    }
-
-    private void unInjectPlayer(Player player) {
-        Channel channel = ((CraftPlayer) player).getHandle().playerConnection.networkManager.channel;
-        channel.eventLoop().submit(() -> {
-            channel.pipeline().remove(player.getName());
-            return null;
-        });
-    }
 
 }
