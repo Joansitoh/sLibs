@@ -25,13 +25,15 @@ public class sLoader {
             String packageName = plugin.getServer().getClass().getPackage().getName();
             String version = packageName.substring(packageName.lastIndexOf('.') + 1);
 
+            plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fLoading NMS Handler for version §e" + version);
+
             try {
                 final Class<?> clazz = Class.forName("club.skilldevs.utils.nms.vers." + version);
                 if (sNMSHandler.class.isAssignableFrom(clazz))
                     sLoader.NMS_HANDLER = ((sNMSHandler) clazz.getConstructor().newInstance());
-                System.out.println("[sLibs] Version " + version + " of NMS loaded!");
+                plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fNMS Handler loaded for version §e" + version);
             } catch (final Exception e) {
-                System.out.println("[sLibs] Could not find support for version " + version + ".");
+                plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fFailed to load NMS Handler for version §e" + version);
             }
         }
     }

@@ -21,12 +21,12 @@ Alternatively, you can build sLibs via **Maven**. Release versions of sLibs are 
     <dependency>
         <groupId>club.skilldevs.utils</groupId>
         <artifactId>sLibs</artifactId>
-        <version>1.4.11</version>
+        <version>1.4.12</version>
     </dependency>
 </dependencies>
 ````
 
-For initialize the sLibs, you only have to register `sLoader` class.
+For initializing sLibs, you only have to register `sLoader` class.
 
 ```java
 package me.example;
@@ -51,7 +51,7 @@ public class LibsTutorial extends JavaPlugin {
 ```
 
 ## 📣 XSeries (CryptoMorin)
-#### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). Is used for get materials and much more for make your plugin Multi-Version.
+#### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). It is used for getting materials and much more for make your plugin Multi-Version.
 
 Create an ItemStack with XSeries.
 ```java
@@ -66,31 +66,14 @@ Sound sound = XSound.ENTITY_WITHER_DEATH.parseSound();
 
 ##### SkullCreator is used for get Skulls with player skins or textures.
 ```java
-```
-
-## 📣 XSeries - CryptoMorin
-#### XSeries is a library who you can found on [GitHub](https://github.com/CryptoMorin/XSeries). Is used for get materials and much more for make your plugin Multi-Version.
-
-Create an ItemStack with XSeries.
-```java
-ItemStack item = XMaterial.PURPLE_WOOL.parseItem();
-Material material  = XMaterial.PURPLE_WOOL.parseMaterial();
-```
-
-Get a Sound with XSeries.
-```java
-Sound sound = XSound.ENTITY_WITHER_DEATH.parseSound();
-```
-
-##### SkullCreator is used for get Skulls with player skins or textures.
-```java
+ItemStack item = SkullCreator.itemFromUrl(url);
 ```
 
 ## 📣 Custom events
 #### PlayerAttackPlayerEvent `public PlayerAttackPlayerEvent(Player player, Player enemy, double damage)`
 
-This event is called when **Player** get hitted by entity.
-Actually detects **Wolf**, **Player**, **Snowball** and **Arrow** hits.
+This event is called when **Player** get hitted by an entity.
+Actually, is detecting **Wolf**, **Player**, **Snowball** and **Arrow** hits.
 ```java
 @EventHandler
 public void onPlayerAttack(PlayerAttackPlayerEvent event) {
@@ -132,7 +115,7 @@ public void onPlayerAuthenticate(PlayerAuthenticateEvent event) {
 > For other types of data, automatically get default value if it is **NOT** set.
 
 #### File configuration basics.
-For create a new file configuration, you have to create a new instance of `FileConfig`.
+In order to create a new file config, you should create a new instance of `FileConfig`.
 ```java
 FileConfig config = new FileConfig(this, "settings.yml");
 ```
@@ -160,9 +143,9 @@ String message = config.getString("TEST-MSG");
 
 ## 📝 Chat utilities
 > ChatUtils api is used to translate messages with chat color format.
-> Also, you have multiple methods to transform **Strings** to other formats.
+> Also, you have multiple methods to transform **Strings** into other formats.
 > 
-> More useful methods are
+> Most useful methods are
 > - `public static String translate(String message)`:
 >   Translate **String** with chat color format.
 > - `public static String[] translate(String[] array)`:
@@ -196,14 +179,14 @@ String bar = ChatUtils.getProgressBar(cooldown_max, left);
 Get country is used to get country name from **Player IP** address.
 `public static String getCountry(Player player)`
 
-**Note:** This method is **NOT** thread-safe. Use it in **AsyncTask**.
+**Note:** This method is **NOT** thread-safe. Use it as **AsyncTask**.
 ```java
 String country = ChatUtils.getCountry(player);
 ```
 
 ## ☎️ Discord
 **For any question or suggestion you can join our Discord Server.**
-You can join our server by clicking the following link.
+Join our server by clicking the following link.
 - **https://discord.gg/gXzRaYdzsh**
 
 ## 📜 License
