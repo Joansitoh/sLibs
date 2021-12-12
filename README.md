@@ -32,6 +32,7 @@ For initializing sLibs, you only have to register `sLoader` class.
 package me.example;
 
 import club.skilldevs.utils.listeners.PlayerDamageListener;
+import club.skilldevs.utils.listeners.PlayerClickListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
