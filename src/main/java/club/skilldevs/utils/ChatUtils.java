@@ -166,7 +166,7 @@ public class ChatUtils {
     /**
      * We recommend the use of async on this function.
      * @param player
-     * @return
+     * @return the player country
      */
     public static String getCountry(Player player) {
         InetSocketAddress ip = new InetSocketAddress(player.getAddress().getAddress().getHostAddress(), 0);

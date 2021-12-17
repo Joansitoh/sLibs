@@ -37,14 +37,14 @@ public class v1_8_R3 implements sNMSHandler {
                 }
             };
         } catch (Exception e) {
-            System.out.println("[GlobalBridge] Error al leer los paquetes al jugador " + player.getName());
+            System.out.println("[sLibs] Error on read packets of " + player.getName());
         }
 
         try {
             ChannelPipeline pipeline = ((CraftPlayer) player).getHandle().playerConnection.networkManager.channel.pipeline();
             pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
         } catch (Exception e) {
-            System.out.println("[GlobalBridge] Error al enviar los paquetes al jugador " + player.getName());
+            System.out.println("[sLibs] Error on send packets of " + player.getName());
         }
     }
 

@@ -20,15 +20,16 @@ public class sLoader {
         if (INSTANCE == null) INSTANCE = plugin;
         if (PLUGIN == null) PLUGIN = this;
         if (LUNAR_API == null) LUNAR_API = new LunarClientAPI(plugin);
+    }
 
+    public static void check(JavaPlugin plugin) {
         if (NMS_HANDLER == null) {
             String packageName = plugin.getServer().getClass().getPackage().getName();
             String version = packageName.substring(packageName.lastIndexOf('.') + 1);
 
             plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fLoading NMS Handler for version §e" + version);
-
             try {
-                final Class<?> clazz = Class.forName("club.skilldevs.utils.nms.vers." + version);
+                final Class<?> clazz = Class.forName("club.skilldevs.utils.nms.vers.v" + version);
                 if (sNMSHandler.class.isAssignableFrom(clazz))
                     sLoader.NMS_HANDLER = ((sNMSHandler) clazz.getConstructor().newInstance());
                 plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fNMS Handler loaded for version §e" + version);

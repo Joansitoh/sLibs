@@ -131,13 +131,21 @@ public enum DefaultFontInfo {
         return DefaultFontInfo.DEFAULT;
     }
 
-    public final static int CENTER_PX = 154;
+    private final static int CENTER_PX = 154;
 
     public static void sendCenteredMessage(Player player, String message) {
-        player.sendMessage(getCenteredMessage(message));
+        sendCenteredMessage(player, message, CENTER_PX);
+    }
+
+    public static void sendCenteredMessage(Player player, String message, int length) {
+        player.sendMessage(getCenteredMessage(message, length));
     }
 
     public static String getCenteredMessage(String message) {
+        return getCenteredMessage(message, CENTER_PX);
+    }
+
+    public static String getCenteredMessage(String message, int length) {
         message = ChatColor.translateAlternateColorCodes('&', message);
 
         int messagePxSize = 0;
@@ -158,7 +166,7 @@ public enum DefaultFontInfo {
         }
 
         int halvedMessageSize = messagePxSize / 2;
-        int toCompensate = CENTER_PX - halvedMessageSize;
+        int toCompensate = length - halvedMessageSize;
         int spaceLength = DefaultFontInfo.SPACE.getLength() + 1;
         int compensated = 0;
         StringBuilder sb = new StringBuilder();
