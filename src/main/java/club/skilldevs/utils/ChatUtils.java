@@ -147,7 +147,11 @@ public class ChatUtils {
     }
 
     public static String getProgressBar(String block, double length, int max, double secondsLeft) {
-        String chrr = "§c" + block, chrr2 = "§a" + block;
+        return getProgressBar(block, length, max, secondsLeft, "§c", "§a");
+    }
+
+    public static String getProgressBar(String block, double length, int max, double secondsLeft, String char1, String char2) {
+        String chrr = char1 + block, chrr2 = char2 + block;
 
         StringBuilder bar = new StringBuilder();
         for (int x = 0; x < length; x++) bar.append(chrr);
