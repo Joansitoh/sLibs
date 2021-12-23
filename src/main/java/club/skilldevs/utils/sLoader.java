@@ -29,7 +29,7 @@ public class sLoader {
 
             plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fLoading NMS Handler for version §e" + version);
             try {
-                final Class<?> clazz = Class.forName("club.skilldevs.utils.nms.vers.v" + version);
+                final Class<?> clazz = Class.forName("club.skilldevs.utils.nms.ver." + version);
                 if (sNMSHandler.class.isAssignableFrom(clazz))
                     sLoader.NMS_HANDLER = ((sNMSHandler) clazz.getConstructor().newInstance());
                 plugin.getServer().getConsoleSender().sendMessage("§a[sLoader] §fNMS Handler loaded for version §e" + version);
