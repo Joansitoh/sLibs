@@ -38,4 +38,14 @@ public class CooldownManager {
         return 0;
     }
 
+    public static double getCooldown(UUID uuid, String key) {
+        if (cooldowns.containsKey(uuid)) {
+            HashMap<String, Long> cooldown = cooldowns.get(uuid);
+            if (cooldown.containsKey(key)) {
+                return ((cooldown.get(key) - System.currentTimeMillis()) / 1000.0);
+            }
+        }
+        return 0;
+    }
+
 }

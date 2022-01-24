@@ -6,11 +6,24 @@
 
     <groupId>club.skilldevs.utils</groupId>
     <artifactId>sLibs</artifactId>
-    <version>1.4.13</version>
+    <version>1.4.16.2</version>
 
-    <name>SkillTeam Library</name>
+    <name>SkillTeam-Library</name>
     <description>This is a library for SkillTeam Development plugins.</description>
     <url>https://github.com/Joansitoh/sLibs</url>
+
+
+    <properties>
+        <!-- Removes warnings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <mainClass>club.skilldevs.utils.launcher.sLoader</mainClass>
+        <author>SkillTeam (Joansiitoh)</author>
+        <customOutput>C:\Users\joans\Documents\GitHub\MavenPlugins\${artifactId}</customOutput>
+
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <licenses>
         <license>
@@ -33,14 +46,6 @@
         <developerConnection>scm:git:ssh://github.com:joansitoh/slibs.git</developerConnection>
         <url>http://github.com/joansitoh/slibs/tree/master</url>
     </scm>
-
-    <properties>
-        <!-- Removes warnings -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <author>SkillTeam (Joansiitoh)</author>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
     <repositories>
         <repository>
@@ -72,6 +77,12 @@
             <version>1.16.18</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.cryptomorin</groupId>
+            <artifactId>XSeries</artifactId>
+            <version>8.5.0</version>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -86,7 +97,24 @@
     </distributionManagement>
 
     <build>
-        <defaultGoal>install</defaultGoal>
+        <!--<outputDirectory>${customOutput}</outputDirectory>-->
+        <defaultGoal>clean install</defaultGoal>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -118,6 +146,52 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--<outputDirectory>${customOutput}</outputDirectory>-->
+                    <minimizeJar>false</minimizeJar>
+                    <finalName>${project.name}-v${project.version}</finalName>
+
+                    <relocations>
+                        <relocation>
+                            <pattern>com.cryptomorin.xseries</pattern>
+                            <shadedPattern>${project.groupId}.xseries</shadedPattern>
+                        </relocation>
+                    </relocations>
+
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/maven/**</exclude>
+                                <exclude>META-INF/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+
+                    <artifactSet>
+                        <excludes>
+                            <exclude>META-INF:**</exclude>
+
+                            <exclude>com.comphenix.protocol:**</exclude>
+                            <exclude>net.bytebuddy:**</exclude>
+                            <exclude>com.google.code.gson:**</exclude>
+                        </excludes>
+                    </artifactSet>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
@@ -143,5 +217,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${project.name}-v${project.version}</finalName>
     </build>
 </project>

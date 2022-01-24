@@ -1,5 +1,6 @@
 package club.skilldevs.utils;
 
+import club.skilldevs.utils.launcher.sLoaderAPI;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,14 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
 
 @Getter
 public class FileConfig {
 
     @Getter
-    private static final List<FileConfig> fileConfigs = new ArrayList<>();
+    private static final HashMap<JavaPlugin, FileConfig> fileConfigs = new HashMap<>();
 
     private final File file;
 
@@ -29,7 +30,24 @@ public class FileConfig {
     private boolean updateHeader;
 
     public static void reloadAllConfig() {
-        fileConfigs.forEach(FileConfig::reloadConfig);
+        fileConfigs.values().forEach(FileConfig::reloadConfig);
+    }
+
+    public FileConfig(File file, String fileName) {
+        this.file = new File(file, fileName);
+        this.updateHeader = false;
+
+        if (!this.file.exists()) {
+            this.file.getParentFile().mkdirs();
+            try {
+                this.file.createNewFile();
+            } catch (IOException e) {
+                Bukkit.getLogger().warning("[sLibs] Failed to create new file " + fileName);
+            }
+        }
+
+        this.configuration = YamlConfiguration.loadConfiguration(this.file);
+        fileConfigs.put(null, this);
     }
 
     public FileConfig(JavaPlugin plugin, String fileName) {
@@ -50,7 +68,7 @@ public class FileConfig {
         }
 
         this.configuration = YamlConfiguration.loadConfiguration(this.file);
-        fileConfigs.add(this);
+        fileConfigs.put(plugin, this);
     }
 
 
@@ -154,7 +172,7 @@ public class FileConfig {
             this.configuration.save(this.file);
             if (updateHeader && header != null) setHeader(header);
         } catch (IOException e) {
-            Bukkit.getLogger().warning("[" + sLoader.INSTANCE.getName() + "] (sLibs) &cCould not save config file " + this.file.toString());
+            Bukkit.getLogger().warning("[" + sLoaderAPI.INSTANCE.getName() + "] (sLibs) &cCould not save config file " + this.file.toString());
         }
     }
 }

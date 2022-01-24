@@ -21,7 +21,7 @@ Alternatively, you can build sLibs via **Maven**. Release versions of sLibs are 
     <dependency>
         <groupId>club.skilldevs.utils</groupId>
         <artifactId>sLibs</artifactId>
-        <version>1.4.12</version>
+        <version>1.4.14</version>
     </dependency>
 </dependencies>
 ````

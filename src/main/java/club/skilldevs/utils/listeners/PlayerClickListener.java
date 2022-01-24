@@ -1,21 +1,12 @@
 package club.skilldevs.utils.listeners;
 
 import club.skilldevs.utils.PlayerCallable;
-import club.skilldevs.utils.events.PlayerAttackPlayerEvent;
-import club.skilldevs.utils.sLoader;
-import io.netty.channel.*;
+import club.skilldevs.utils.launcher.sLoaderAPI;
 import lombok.Getter;
-import net.minecraft.server.v1_8_R3.PacketPlayInArmAnimation;
-import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
-import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -43,12 +34,12 @@ public class PlayerClickListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if (sLoader.NMS_HANDLER != null) sLoader.NMS_HANDLER.injectPlayer(event.getPlayer());
+        if (sLoaderAPI.NMS_HANDLER != null) sLoaderAPI.NMS_HANDLER.injectPlayer(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        if (sLoader.NMS_HANDLER != null) sLoader.NMS_HANDLER.unInjectPlayer(event.getPlayer());
+        if (sLoaderAPI.NMS_HANDLER != null) sLoaderAPI.NMS_HANDLER.unInjectPlayer(event.getPlayer());
     }
 
     ///////////////////////////////////////////////////////////////////////////

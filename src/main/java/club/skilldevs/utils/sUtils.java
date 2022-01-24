@@ -1,8 +1,7 @@
 package club.skilldevs.utils;
 
 import club.skilldevs.utils.listeners.PlayerClickListener;
-import club.skilldevs.utils.listeners.PlayerDamageListener;
-import club.skilldevs.utils.xseries.XMaterial;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;

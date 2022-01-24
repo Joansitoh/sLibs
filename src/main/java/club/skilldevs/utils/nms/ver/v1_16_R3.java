@@ -22,18 +22,26 @@ public class v1_16_R3 implements sNMSHandler {
                 @Override
                 public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
                     //Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "PACKET READ: " + ChatColor.RED + packet.toString());
-                    if (packet instanceof PacketPlayInArmAnimation) {
-                        PlayerClickListener.addClick(player);
-                        if (PlayerClickListener.getCallableMap().containsKey(player.getUniqueId())) PlayerClickListener.getCallableMap().get(player.getUniqueId()).call(player);
-                    }
+                    try {
+                        if (packet instanceof PacketPlayInArmAnimation) {
+                            PlayerClickListener.addClick(player);
+                            if (PlayerClickListener.getCallableMap().containsKey(player.getUniqueId())) PlayerClickListener.getCallableMap().get(player.getUniqueId()).call(player);
+                        }
 
-                    super.channelRead(channelHandlerContext, packet);
+                        super.channelRead(channelHandlerContext, packet);
+                    } catch (Exception e) {
+
+                    }
                 }
 
                 @Override
                 public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise) throws Exception {
                     //Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "PACKET WRITE: " + ChatColor.GREEN + packet.toString());
-                    super.write(channelHandlerContext, packet, channelPromise);
+                    try {
+                        super.write(channelHandlerContext, packet, channelPromise);
+                    } catch (Exception e) {
+
+                    }
                 }
             };
         } catch (Exception e) {

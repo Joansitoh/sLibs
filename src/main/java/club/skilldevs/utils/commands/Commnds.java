@@ -1,7 +1,7 @@
 package club.skilldevs.utils.commands;
 
 import club.skilldevs.utils.ChatUtils;
-import club.skilldevs.utils.sLoader;
+import club.skilldevs.utils.launcher.sLoaderAPI;
 import club.skilldevs.utils.texts.FancyMessage;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public abstract class Commnds extends BukkitCommand {
 
-    public JavaPlugin INSTANCE = sLoader.INSTANCE;
+    public JavaPlugin INSTANCE = sLoaderAPI.INSTANCE;
 
     private boolean forPlayersOnly, async;
     private String permission;
@@ -85,7 +85,7 @@ public abstract class Commnds extends BukkitCommand {
                 return true;
             }
 
-            if (this.async) Bukkit.getScheduler().runTaskAsynchronously(sLoader.INSTANCE, () -> execute(sender, args, alias));
+            if (this.async) Bukkit.getScheduler().runTaskAsynchronously(sLoaderAPI.INSTANCE, () -> execute(sender, args, alias));
             else execute(sender, args, alias);
             return true;
         }
@@ -97,7 +97,7 @@ public abstract class Commnds extends BukkitCommand {
         }
 
         if (this.async) {
-            Bukkit.getScheduler().runTaskAsynchronously(sLoader.INSTANCE, () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(sLoaderAPI.INSTANCE, () -> {
                 execute(player, args, alias);
                 execute(sender, args, alias);
             });

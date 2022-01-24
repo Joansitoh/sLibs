@@ -241,11 +241,11 @@ public final class LunarClientAPI implements Listener {
     }
 
     /**
-     * Override the normal (bukkit) nametag with lunar client nametags.
-     * This supports multiple lines, so index 0 will be bottom of the nametags.
+     * Override the normal (bukkit) nametag with lunar client club.skilldevs.utils.nametags.
+     * This supports multiple lines, so index 0 will be bottom of the club.skilldevs.utils.nametags.
      *
      * @param target The player whos nametag will be affected for the viewer.
-     * @param nametag The list of nametags that will be sent to the viewer. Supports color codes.
+     * @param nametag The list of club.skilldevs.utils.nametags that will be sent to the viewer. Supports color codes.
      * @param viewer The observer who will see the targets nametag as a lunar client nametag.
      */
     public void overrideNametag(Player target, List<String> nametag, Player viewer) {
