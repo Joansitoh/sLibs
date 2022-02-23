@@ -9,18 +9,28 @@ import java.util.List;
 public class ItemUtils {
 
     public static ItemStack setItemName(ItemStack item, String name) {
+        return setItemName(item, name, false);
+    }
+
+    public static ItemStack setItemName(ItemStack item, String name, boolean color) {
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
+        meta.setDisplayName(color ? ChatUtils.translate(name) : name);
         item.setItemMeta(meta);
         return item;
     }
 
     public static ItemStack setItemLore(ItemStack item, List<String> lore) {
+        return setItemLore(item, lore, false);
+    }
+
+    public static ItemStack setItemLore(ItemStack item, List<String> lore, boolean color) {
         ItemMeta meta = item.getItemMeta();
-        meta.setLore(lore);
+        meta.setLore(color ? ChatUtils.translate(lore) : lore);
         item.setItemMeta(meta);
         return item;
     }
+
+
 
     // Check if item has valid name.
     public static boolean hasValidName(ItemStack item) {
@@ -35,8 +45,8 @@ public class ItemUtils {
     }
 
     public static String getItemName(ItemStack item) {
-        String name = "";
-        if (item.hasItemMeta() && item.getItemMeta().hasDisplayName())
+        String name = item == null ? "" : item.getType().name();
+        if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
             name = item.getItemMeta().getDisplayName();
         return name;
     }
